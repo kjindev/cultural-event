@@ -1,8 +1,9 @@
 import Head from "next/head";
 import { css } from "@emotion/react";
 import SearchForm from "../_components/global/SearchForm";
-import { mainColor, maxWidth } from "@/util/constant";
+import { maxWidth } from "@/util/constant";
 import { fontSize } from "@/util/font";
+import ListItem from "../_components/content/ListItem";
 
 export default function Home() {
   return (
@@ -14,13 +15,21 @@ export default function Home() {
         "& .content-title": {
           textAlign: "center",
         },
+        "& .search-box": {
+          flexDirection: "column",
+        },
       })}
     >
       <div className="content-container">
-        <div className="content-title">
-          <span>키워드</span>로 검색한 결과예요
+        <div className="search-box">
+          <div className="content-title">
+            <span>키워드</span>로 검색한 결과예요
+          </div>
+          <SearchForm width="500px" />
         </div>
-        <SearchForm width="500px" />
+        <div className="list-box">
+          <ListItem />
+        </div>
       </div>
     </div>
   );
@@ -33,18 +42,28 @@ const style = {
   alignItems: "center",
   "& .content-container": {
     width: maxWidth,
-    height: "200px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-  },
-  "& .content-title": {
-    fontSize: fontSize.xl,
-    color: "#00000090",
-    margin: "18px 0",
-    "& span": {
-      color: "purple",
-      fontWeight: 700,
+    "& .search-box": {
+      height: "200px",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    "& .content-title": {
+      fontSize: fontSize.xl,
+      color: "#00000090",
+      margin: "18px 0",
+      "& span": {
+        color: "purple",
+        fontWeight: 700,
+      },
+    },
+    "& .list-box": {
+      margin: "20px",
+      padding: "0 20px",
+      width: "90%",
     },
   },
 };
