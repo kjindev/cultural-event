@@ -3,6 +3,9 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import { css } from "@emotion/react";
+import NavBar from "./_components/global/NavBar";
+import Main from "./_components/home/Introduction";
+import Introduction from "./_components/home/Introduction";
 
 export default function Home() {
   return (
@@ -13,7 +16,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div css={css(style)}>hello world</div>
+      <div css={css(style)}>
+        <Introduction />
+      </div>
     </>
   );
 }
