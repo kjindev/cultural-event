@@ -1,11 +1,9 @@
 // /** @jsxImportSource @emotion/react */
 
 import Head from "next/head";
-import { Inter } from "next/font/google";
 import { css } from "@emotion/react";
-import NavBar from "./_components/global/NavBar";
-import Main from "./_components/home/Introduction";
 import Introduction from "./_components/home/Introduction";
+import Category from "./_components/home/Category";
 
 export default function Home() {
   return (
@@ -18,6 +16,7 @@ export default function Home() {
       </Head>
       <div css={css(style)}>
         <Introduction />
+        <Category />
       </div>
     </>
   );

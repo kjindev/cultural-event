@@ -1,6 +1,6 @@
 export function Illustration() {
   return (
-    <div>
+    <>
       <style>{style}</style>
       <div className="head-plane">
         <div className="plane">
@@ -10,7 +10,7 @@ export function Illustration() {
           <div className="line"></div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

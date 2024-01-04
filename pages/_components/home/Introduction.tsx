@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import { Illustration } from "./Illustration";
 import { fontSize } from "@/util/font";
 import SearchForm from "../global/SearchForm";
+import { maxWidth } from "@/util/constant";
 
 export default function Introduction() {
   return (
@@ -34,7 +35,7 @@ const style = {
   justifyContent: "center",
   alignItems: "center",
   "& .container": {
-    width: "1200px",
+    width: maxWidth,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
