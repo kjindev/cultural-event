@@ -20,25 +20,11 @@ export default function Category() {
         <div className="category-books">
           {list.map((item, i) => (
             <div key={i}>
-              <Book
-                className="book-item"
-                width={180}
-                height={210}
-                color="#d6d3d1"
-              >
+              <Book className="book-item" color="#d6d3d1">
                 <div>{item}</div>
               </Book>
             </div>
           ))}
-          {/* <Book width={180} height={210} color="#d6d3d1">
-            <div>hello</div>
-          </Book>
-          <Book width={180} height={210} color="#d6d3d1">
-            <div>hello</div>
-          </Book>
-          <Book width={180} height={210} color="#d6d3d1">
-            <div>hello</div>
-          </Book> */}
         </div>
       </div>
     </div>

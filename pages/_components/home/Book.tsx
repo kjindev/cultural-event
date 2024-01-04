@@ -3,39 +3,13 @@
 import { ReactNode } from "react";
 
 interface DataType {
-  width: number;
-  height: number;
-  color: string;
+  color?: string;
   children: ReactNode;
   className?: string;
 }
-export default function Book({
-  width,
-  height,
-  color,
-  children,
-  className,
-}: DataType) {
-  return (
-    <div className={className}>
-      <style>{style}</style>
-      <div id="container">
-        <div className="book">
-          <div className="bookCover">
-            <div className="binder"></div>
-            <div className="content">
-              <div className="title">{children}</div>
-            </div>
-          </div>
-          <div className="bookSide"></div>
-          <div className="bookBack"></div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
-const style = `
+export default function Book({ color, children, className }: DataType) {
+  const style = `
 #container {
   display: flex;
   justify-content: center;
@@ -52,7 +26,7 @@ const style = `
 
   .bookCover {
     z-index: 10;
-    background-color: #e5e7eb; /* 책 색깔 */
+    background-color: ${color || "#e5e7eb"}; /* 책 색깔 */
     border-radius: inherit;
     box-shadow: inset -2px -2px 8px rgba(0, 0, 0, 0.03);
     display: flex;
@@ -101,7 +75,7 @@ const style = `
   .bookBack {
     position: absolute;
     right: 0;
-    background-color: #e5e7eb; /* 책 색깔 */
+    background-color: ${color || "#e5e7eb"}; /* 책 색깔 */
     border-radius: inherit;
     width: 80%;
     padding-left: 20px;
@@ -127,3 +101,22 @@ const style = `
     transform: perspective(300px) rotateY(-5deg) translateX(20px);
   }
 }`;
+
+  return (
+    <div className={className}>
+      <style>{style}</style>
+      <div id="container">
+        <div className="book">
+          <div className="bookCover">
+            <div className="binder"></div>
+            <div className="content">
+              <div className="title">{children}</div>
+            </div>
+          </div>
+          <div className="bookSide"></div>
+          <div className="bookBack"></div>
+        </div>
+      </div>
+    </div>
+  );
+}
