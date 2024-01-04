@@ -19,16 +19,15 @@ export default function NavBar() {
 
 const style = {
   zIndex: 250,
-  width: "100vw",
+  width: "100%",
   height: "60px",
   backgroundColor: "white",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   boxShadow: shadow,
-  paddingLeft: "18px",
   "& .container": {
-    width: 900,
+    width: maxWidth,
   },
   // "& .container": {
   //   width: maxWidth,
