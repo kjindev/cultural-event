@@ -1,25 +1,36 @@
 import { subColor2 } from "@/util/constant";
 import { fontSize } from "@/util/font";
-import { getData } from "@/util/function";
+import { debounce, getData } from "@/util/function";
 import useDataStore from "@/util/store";
 
 import { css } from "@emotion/react";
-import { useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
 export default function SearchForm({ width }: { width?: string }) {
-  const [keyword, setKeyword] = useState("");
-  const { changeSearchKeyword, changeSearchList } = useDataStore();
+  const [inputValue, setInputValue] = useState("");
+  const {
+    searchKeyword,
+    changeSearchKeyword,
+    changeSearchList,
+    changeRecommendList,
+  } = useDataStore();
 
-  const handleSearch = (event: any) => {
-    const value = event?.target.value;
-    setKeyword(value);
-  };
+  const onChangeInput = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      debounce(setInputValue(e.target.value), 500);
+    },
+    [debounce, setInputValue]
+  );
+
+  // const handleSearch = (event: any) => {
+  //   const value = event?.target.value;
+  //   debounce(setInputValue(value), 500);
+  // };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    changeSearchKeyword(keyword);
-    getData({ codename: keyword, title: keyword }).then((res) => {
-      console.log(res);
+    changeSearchKeyword(inputValue);
+    getData({ codename: inputValue, title: inputValue }).then((res) => {
       changeSearchList(res);
     });
   };
@@ -40,9 +51,9 @@ export default function SearchForm({ width }: { width?: string }) {
   return (
     <form onSubmit={handleSubmit} css={css(style)}>
       <input
-        onChange={handleSearch}
-        value={keyword}
-        placeholder="지역, 이름으로 검색해보세요"
+        onChange={onChangeInput}
+        value={inputValue}
+        placeholder="이름, 카테고리로 검색해보세요"
       />
     </form>
   );

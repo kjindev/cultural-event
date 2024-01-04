@@ -3,8 +3,13 @@ import { Illustration } from "./Illustration";
 import { fontSize } from "@/util/font";
 import SearchForm from "../global/SearchForm";
 import { maxWidth } from "@/util/constant";
+import { useEffect } from "react";
+import { getData } from "@/util/function";
+import useDataStore from "@/util/store";
 
 export default function Introduction() {
+  const { searchKeyword, changeRecommendList } = useDataStore();
+
   return (
     <div css={css(style)}>
       <div className="container">

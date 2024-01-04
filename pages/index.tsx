@@ -4,6 +4,9 @@ import Head from "next/head";
 import { css } from "@emotion/react";
 import Introduction from "./_components/home/Introduction";
 import Category from "./_components/home/Category";
+import { useResults } from "@/util/function";
+import useDataStore from "@/util/store";
+import { useEffect } from "react";
 
 export default function Home() {
   return (

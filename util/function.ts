@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useQuery } from "react-query";
 
 interface PropsType {
   codename: string;
@@ -27,4 +28,23 @@ export const getData = async (option: PropsType) => {
     console.log(error);
     return null;
   }
+};
+
+export const useResults = (keyword: any) => {
+  return useQuery(
+    ["keyword", keyword],
+    () => getData({ codename: keyword, title: keyword }),
+    {
+      enabled: !!keyword,
+      select: (data) => data,
+    }
+  );
+};
+
+export const debounce = (callback: any, duration: number) => {
+  let timer: any;
+  return (...args: any) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => callback(...args), duration);
+  };
 };
