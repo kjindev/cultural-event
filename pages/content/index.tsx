@@ -1,11 +1,18 @@
 import Head from "next/head";
 import { css } from "@emotion/react";
 import SearchForm from "../_components/global/SearchForm";
-import { maxWidth } from "@/util/constant";
+import { maxWidth, shadow } from "@/util/constant";
 import { fontSize } from "@/util/font";
 import ListItem from "../_components/content/ListItem";
+import { useEffect, useState } from "react";
+import { getData } from "@/util/function";
+import { APIType } from "@/util/type";
+import useDataStore from "@/util/store";
 
 export default function Home() {
+  const [list, setList] = useState<APIType[]>([]);
+  const { searchList, searchKeyword } = useDataStore();
+
   return (
     <div
       css={css(style, {
@@ -23,13 +30,17 @@ export default function Home() {
       <div className="content-container">
         <div className="search-box">
           <div className="content-title">
-            <span>키워드</span>로 검색한 결과예요
+            <span>{searchKeyword}</span>로 검색한 결과예요
           </div>
           <SearchForm width="500px" />
         </div>
-        <div className="list-box">
-          <ListItem />
-        </div>
+        {searchList?.map((item: APIType, i: number) => {
+          return (
+            <div key={i} className="list-box">
+              {item.TITLE}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -64,6 +75,10 @@ const style = {
       margin: "20px",
       padding: "0 20px",
       width: "90%",
+      boxShadow: shadow,
+      backgroundColor: "white",
+      height: "180px",
+      borderRadius: "12px",
     },
   },
 };

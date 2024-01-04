@@ -1,14 +1,27 @@
 import { subColor2 } from "@/util/constant";
 import { fontSize } from "@/util/font";
+import { getData } from "@/util/function";
+import useDataStore from "@/util/store";
+
 import { css } from "@emotion/react";
 import { useState } from "react";
 
 export default function SearchForm({ width }: { width?: string }) {
-  const [searchKeyword, setSearchKeyword] = useState("");
+  const [keyword, setKeyword] = useState("");
+  const { changeSearchKeyword, changeSearchList } = useDataStore();
 
   const handleSearch = (event: any) => {
-    const keyword = event?.target.value;
-    setSearchKeyword(keyword);
+    const value = event?.target.value;
+    setKeyword(value);
+  };
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    changeSearchKeyword(keyword);
+    getData({ codename: keyword, title: keyword }).then((res) => {
+      console.log(res);
+      changeSearchList(res);
+    });
   };
 
   const style = {
@@ -25,10 +38,10 @@ export default function SearchForm({ width }: { width?: string }) {
   };
 
   return (
-    <form css={css(style)}>
+    <form onSubmit={handleSubmit} css={css(style)}>
       <input
         onChange={handleSearch}
-        value={searchKeyword}
+        value={keyword}
         placeholder="지역, 이름으로 검색해보세요"
       />
     </form>

@@ -1,8 +1,9 @@
 import { shadow } from "@/util/constant";
+import { APIType } from "@/util/type";
 import { css } from "@emotion/react";
 
 export default function ListItem() {
-  return <div css={css(style)}>ListItem</div>;
+  return <div css={css(style)}></div>;
 }
 
 const style = {
