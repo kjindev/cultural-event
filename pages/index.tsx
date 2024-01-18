@@ -2,13 +2,22 @@
 
 import Head from "next/head";
 import { css } from "@emotion/react";
-import Introduction from "./_components/home/Introduction";
-import Category from "./_components/home/Category";
-import { useResults } from "@/util/function";
+import Introduction from "./components/Introduction";
+import { getData } from "@/util/function";
 import useDataStore from "@/util/store";
 import { useEffect } from "react";
 
 export default function Home() {
+  const { totalList, changeTotalList } = useDataStore();
+
+  useEffect(() => {
+    if (!totalList) {
+      getData({ codename: "", title: "" }).then((res) => {
+        changeTotalList(res);
+      });
+    }
+  }, []);
+
   return (
     <>
       <Head>
@@ -17,9 +26,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div css={css(style)}>
+      <div className="flex justify-center items-center bg-sky-100">
         <Introduction />
-        <Category />
       </div>
     </>
   );
