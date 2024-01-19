@@ -5,7 +5,7 @@ import { ChangeEvent, useCallback, useState } from "react";
 
 export default function SearchBox() {
   const [inputValue, setInputValue] = useState("");
-  const { changeSearchKeyword, changeSearchList } = useDataStore();
+  const { searchList, changeSearchKeyword, changeSearchList } = useDataStore();
 
   const onChangeInput = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
