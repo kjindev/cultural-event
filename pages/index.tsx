@@ -1,14 +1,22 @@
 // /** @jsxImportSource @emotion/react */
 
 import Head from "next/head";
-import { css } from "@emotion/react";
-import Introduction from "./_components/home/Introduction";
-import Category from "./_components/home/Category";
-import { useResults } from "@/util/function";
+import { getData } from "@/util/function";
 import useDataStore from "@/util/store";
 import { useEffect } from "react";
+import Container from "./components/Container";
 
 export default function Home() {
+  const { totalList, changeTotalList } = useDataStore();
+
+  useEffect(() => {
+    if (!totalList) {
+      getData({ codename: "", title: "" }).then((res) => {
+        changeTotalList(res);
+      });
+    }
+  }, []);
+
   return (
     <>
       <Head>
@@ -17,14 +25,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div css={css(style)}>
-        <Introduction />
-        <Category />
+      <div className="flex justify-center items-center bg-gray-100 h-[100vh]">
+        <Container />
       </div>
     </>
   );
 }
-
-const style = {
-  // color: "red",
-};
